@@ -1,3 +1,3 @@
 <?php
-echo "Prueba Diego Fonseca";
+echo "Prueba Diego Fonseca version 2";
 ?>
