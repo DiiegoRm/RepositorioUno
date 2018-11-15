@@ -27,7 +27,7 @@
 							include("mensaje.php");
 							?>
 							<!--<span class="avatar"><img src="images/avatar.jpg" alt="" /></span>-->
-							<h1>Tickets Restaurante</h1>
+							<h1>Aula Virtual</h1>
 							<p>Inicie sesion para los tickets</p>
 						</header>
 
