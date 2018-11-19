@@ -16,7 +16,7 @@
 	<body>
 		<?php
 			include("conexion.php");/*llama a otra pagina*/
-            $query     = 'SELECT b.id, b.nombre FROM pro_detalle_curso a JOIN pro_usuario b ON a.id_estudiante = b.id WHERE id_curso = '.$_GET["id"]; /*aqui se almacena la consulta en una variable*/
+            $query     = 'SELECT b.id,  CONCAT(b.nombre_uno, " ", b.apellido_uno) as nombre FROM pro_detalle_curso a JOIN pro_usuario b ON a.id_estudiante = b.id WHERE id_curso = '.$_GET["id"]; /*aqui se almacena la consulta en una variable*/
             $resultado = $conexion->query($query); /*con esta linea se ejecuta el query*/
             $columnas  = $resultado->fetch(PDO::FETCH_ASSOC); /*guardo el resultado de la consulta fecht trae el siguiente registro*/
             $total     = $resultado->rowCount(); /*cuenta las filas*/
@@ -24,7 +24,7 @@
         <br>
         <div class="container">
             <div class="page-header">
-                    <h1>Estudiantes en el curso: <?=$_GET['nombre_curso']?><span class="pull-right label label-default"><?=$total?></span></h1>
+                <h1>Listado : <?=$_GET['nombre_curso']?><span class="pull-right label"><small><a href="proceso.php">Atras</a></small> - <small><a href="index.php">Salir</a></small></span></h1>
             </div>
             <table class="table">
                 <thead>

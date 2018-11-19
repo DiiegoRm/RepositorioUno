@@ -19,7 +19,7 @@ $texto = "";
 			$texto = "Lo sentimos no se pudo registrar su ticket";
 
 		if($mensaje == 6)
-			$texto = "No hay Restaurante asociado al número digitado";
+			$texto = "Se agrego Correctamente el registro";
 
 		if($mensaje == 7)
 			$texto = "El id de Restaurante debe ser numerico";

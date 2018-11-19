@@ -16,7 +16,7 @@
 	<body>
 		<?php
 			include("conexion.php");/*llama a otra pagina*/
-            $query     = 'SELECT a.id, a.nombre, IF(b.nota is null, "0", b.nota) as nota, c.nombre as curso, c.id as id_curso FROM pro_actividad a JOIN pro_curso c ON a.id_curso = c.id AND c.id = '.$_GET["id_curso"].' LEFT JOIN pro_nota b ON a.id = b.id_actividad AND b.id_estudiante = '.$_GET["id_estudiante"]; /*aqui se almacena la consulta en una variable*/
+            $query     = 'SELECT a.id, a.nombre, b.id_estudiante as estudiante FROM pro_curso a JOIN pro_detalle_curso b ON a.id = b.id_curso WHERE b.id_estudiante = '.$_GET["id_estudiante"]; /*aqui se almacena la consulta en una variable*/
             $resultado = $conexion->query($query); /*con esta linea se ejecuta el query*/
             $columnas  = $resultado->fetch(PDO::FETCH_ASSOC); /*guardo el resultado de la consulta fecht trae el siguiente registro*/
             $total     = $resultado->rowCount(); /*cuenta las filas*/
@@ -24,15 +24,14 @@
         <br>
         <div class="container">
             <div class="page-header">
-                    <h1>Notas: <span class="pull-right label"><small><a href="listadoEstudiantes.php?id=<?=$_GET["id_curso"]?>&nombre_curso=<?=$columnas['curso']?>">Atras</a></small> - <small><a href="index.php">Salir</a></small></span></h1>
+                    <h1>Notas: <span class="pull-right label"><small><a href="proceso.php">Atras</a></small> - <small><a href="index.php">Salir</a></small></span></h1>
             </div>
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">Numero</th>
-                        <th scope="col">Actividades</th>
-                        <th scope="col">Nota</th>
-                        <th scope="col">Acci&oacute;n</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Detalle</th>
                         
                     </tr>
                 </thead>
@@ -43,14 +42,9 @@
                         do{
                         ?>
                         <tr>
-                            <td><?=$i?></td>
+                            <td><?=$columnas['id']?></td>
                             <td><?=$columnas['nombre']?></td>
-                            <td><input type="number" class="form-control" width="40%" value="<?=$columnas["nota"]?>" name="nota_<?=$columnas["id"]?>" id="nota_<?=$columnas["id"]?>" required="" min="0" max="5"></td>
-                            <td>
-                                <a href="guardar.php?id_actividad=<?=$columnas["id"]?>&id_estudiante=<?=$_GET["id_estudiante"]?>&id_curso=<?=$_GET["id_curso"]?>" onclick="if($('#nota_<?=$columnas["id"]?>').val() != '')location.href=this.href+'&nota='+$('#nota_<?=$columnas["id"]?>').val();return false;">
-                                    Guadar
-                                </a>
-                            </td>
+                            <td><a href="listadoActividades3.php?id_curso=<?=$columnas['id']?>&id_estudiante=<?=$columnas['estudiante']?>">Ver detalle</a></td>
                         </tr>
                         <?php
                         $i++;
